@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:isolate';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -18,21 +15,11 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   HomeProvider? providerTrue;
   HomeProvider? providerFalse;
-  ReceivePort _port = ReceivePort();
 
   @override
   void initState() {
     super.initState();
     Provider.of<HomeProvider>(context, listen: false).loadVideo();
-
-  }
-
-
-  @pragma('vm:entry-point')
-  static void downloadCallback(String id, int status, int progress) {
-    final SendPort? send =
-        IsolateNameServer.lookupPortByName('downloader_send_port');
-    send!.send([id, status, progress]);
   }
 
   @override
