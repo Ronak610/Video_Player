@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:video_downloader/screen/HomeScreen/model/YouTubeModel.dart';
 import 'package:video_downloader/screen/HomeScreen/provider/HomeProvider.dart';
 import 'package:video_downloader/utils/ApiHelper.dart';
-import 'package:video_player/video_player.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                             child: InkWell(
                               onTap: () {
                                 providerFalse!.AddValue(data: providerFalse!.youTubeModel!.results![index]);
-                                providerFalse!.LoadVideo();
+                                providerFalse!.loadVideo();
                                 Navigator.pushNamed(context, 'D');
                               },
                               child: Column(

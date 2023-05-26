@@ -1,14 +1,21 @@
+import 'dart:io';
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:video_downloader/screen/HomeScreen/model/YouTubeModel.dart';
 import 'package:video_downloader/utils/ApiHelper.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeProvider extends ChangeNotifier {
   TextEditingController txtSearch = TextEditingController();
   YouTubeModel? youTubeModel = YouTubeModel();
   Results result = Results();
   String search = "";
-  VideoPlayerController? videoPlayerController;
+  double progres=0;
+  YoutubePlayerController? controller;
 
   Future<void> SearchVideo() async {
     search = txtSearch.text;
@@ -20,21 +27,16 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void LoadVideo()
+  void loadVideo()
   {
-    print("====== URL : ${result.url}");
-    videoPlayerController = VideoPlayerController.network("https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4")..initialize();
+    controller = YoutubePlayerController(
+      initialVideoId: result.id!,
+      flags: const YoutubePlayerFlags(autoPlay: true),
+    );
     notifyListeners();
   }
 
-  void ChangeValue() {
-    if (videoPlayerController!.value.isPlaying) {
-      videoPlayerController!.pause();
-      print("====I Play : ${videoPlayerController!.value.isPlaying}");
-    } else {
-      videoPlayerController!.play();
-      print("====E Play : ${videoPlayerController!.value.isPlaying}");
-    }
-    notifyListeners();
-  }
+
+
+
 }

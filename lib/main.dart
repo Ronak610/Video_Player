@@ -5,7 +5,7 @@ import 'package:video_downloader/screen/DetailScreen/View/DetailPage.dart';
 import 'package:video_downloader/screen/HomeScreen/provider/HomeProvider.dart';
 import 'package:video_downloader/screen/HomeScreen/view/homescreen.dart';
 
-void main() {
+void main()  {
   runApp(
    MultiProvider(
      providers: [
